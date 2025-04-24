@@ -52,7 +52,7 @@ pipeline {
         stage('STEP 3: PACKAGE'){
             steps{
                 sh '''
-                    mvn clean compile
+                    mvn package
                 '''             
             }                      
         }
