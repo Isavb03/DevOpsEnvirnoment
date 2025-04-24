@@ -42,15 +42,18 @@ pipeline {
        
         stage('Step 2: BUILD') {
             steps {
-                bat 'mvn clean compile'
-               
+                sh '''
+                    mvn clean compile
+                '''               
             }
            
         }
        
         stage('STEP 3: PACKAGE'){
             steps{
-                bat 'mvn package'
+                sh '''
+                    mvn clean compile
+                '''             
             }                      
         }
     }
