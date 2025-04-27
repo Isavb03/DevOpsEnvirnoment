@@ -27,9 +27,9 @@ pipeline {
         maven "M3"
     }
 
-    triggers {
-        GitHubPush()
-    }
+    // triggers {
+    //     GitHubPush()
+    // }
 
     stages {
        
