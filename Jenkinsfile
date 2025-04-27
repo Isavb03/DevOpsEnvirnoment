@@ -58,15 +58,15 @@ pipeline {
             }                      
         }
 
-        stage('STEP 4: TEST'){
-            steps{     
-            }                      
-        }
+        // stage('STEP 4: TEST'){
+        //     steps{     
+        //     }                      
+        // }
 
-        stage('STEP 5: DEPLOY'){
-            steps{           
-            }                      
-        }        
+        // stage('STEP 5: DEPLOY'){
+        //     steps{           
+        //     }                      
+        // }        
 
     }
 
