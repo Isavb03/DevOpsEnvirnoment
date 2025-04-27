@@ -27,16 +27,17 @@ pipeline {
         maven "M3"
     }
 
+    triggers {
+        GitHubPush()
+    }
+
     stages {
        
         stage('Step 1: LOAD SCM'){
             steps {
                 // Get some code from a GitHub repository
                 git branch: 'feature/initialconfig', url: 'https://github.com/Isavb03/DevOpsEnvirnoment.git'
-                // sh '''
-                //     git --version
-                //     mvn --version
-                // '''
+
             }
         }
        
@@ -56,8 +57,19 @@ pipeline {
                 '''             
             }                      
         }
+
+        stage('STEP 4: TEST'){
+            steps{     
+            }                      
+        }
+
+        stage('STEP 5: DEPLOY'){
+            steps{           
+            }                      
+        }        
+
     }
-    
+
 
     post {
       // If Maven was able to run the tests, even if some of the test
