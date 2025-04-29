@@ -63,12 +63,13 @@ pipeline {
         //     }                      
         // }
 
-        stage('STEP 5: BUILD DOCKER IMAGE'){
-            steps{     
+        stage('STEP 5: BUILD DOCKER IMAGE') {
+            steps {
                 sh '''
-                    docker build -t isavb03/university-result-system:${env.BUILD_ID} .
-                '''             
-            }                      
+                    BUILD_ID=${BUILD_ID}
+                    docker build -t isavb03/university-result-system:$BUILD_ID .
+                '''
+            }
         }
 
         stage('STEP 6: PUSH DOCKER IMAGE'){
