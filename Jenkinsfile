@@ -72,7 +72,6 @@ pipeline {
             }
         }
 
-
         stage('STEP 6: PUSH DOCKER IMAGE'){
             steps {
                 withCredentials([usernamePassword(
