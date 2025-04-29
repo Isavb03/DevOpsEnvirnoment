@@ -66,31 +66,36 @@ pipeline {
         stage('STEP 5: BUILD DOCKER IMAGE'){
             steps{     
                 sh '''
-                    docker build -t isavb03/jenkinsdemo:latest .
+                    docker build -t isavb03/university-result-system:${env.BUILD_ID} .
                 '''             
             }                      
         }
 
         stage('STEP 6: PUSH DOCKER IMAGE'){
-            steps{     
-                sh '''
-                    docker login -u isavb03 -p 12345678
-                    docker push isavb03/jenkinsdemo:latest
-                '''             
-            }                      
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'docker-hub-creds',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PWD'
+                )]) {
+                    sh """
+                        docker login -u ${env.DOCKER_USER} -p ${env.DOCKER_PWD}
+                        docker push isavb03/university-result-system:${env.BUILD_ID}
+                    """
+                }
+            }
         }
 
         stage('STEP 7: DEPLOY TO MINIKUBE'){
             steps{     
                 sh '''
-                    kubectl apply -f kubernetes/deployment.yaml
-                    kubectl apply -f kubernetes/service.yaml
+                    kubectl apply -f deployment.yaml
+                    kubectl apply -f service.yaml
                 '''             
             }                   
         }      
 
     }
-
 
     post {
       // If Maven was able to run the tests, even if some of the test

@@ -7,6 +7,6 @@ spec:
   selector:
     app: university-result-system   # Debe coincidir con el deployment
   ports:
-    - protocol: TCP
-      port: 80                      # Puerto del servicio
-      targetPort: 8080              # Puerto del contenedor
+    - port: 80
+      targetPort: 8080
+      nodePort: 30080             
