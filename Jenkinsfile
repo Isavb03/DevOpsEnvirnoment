@@ -63,10 +63,31 @@ pipeline {
         //     }                      
         // }
 
-        // stage('STEP 5: DEPLOY'){
-        //     steps{           
-        //     }                      
-        // }        
+        stage('STEP 5: BUILD DOCKER IMAGE'){
+            steps{     
+                sh '''
+                    docker build -t isavb03/jenkinsdemo:latest .
+                '''             
+            }                      
+        }
+
+        stage('STEP 6: PUSH DOCKER IMAGE'){
+            steps{     
+                sh '''
+                    docker login -u isavb03 -p 12345678
+                    docker push isavb03/jenkinsdemo:latest
+                '''             
+            }                      
+        }
+
+        stage('STEP 7: DEPLOY TO MINIKUBE'){
+            steps{     
+                sh '''
+                    kubectl apply -f kubernetes/deployment.yaml
+                    kubectl apply -f kubernetes/service.yaml
+                '''             
+            }                   
+        }      
 
     }
 
