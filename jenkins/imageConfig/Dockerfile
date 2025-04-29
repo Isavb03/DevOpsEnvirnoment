@@ -1,13 +1,13 @@
-# Usa la imagen oficial de Jenkins con JDK17
 FROM jenkins/jenkins:lts-jdk17
-
-# Cambia a root para instalar paquetes
 USER root
 
-# Instala el cliente Docker y limpia la cache
+# Instala Docker CLI
 RUN apt-get update \
-    && apt-get install -y docker.io \
-    && rm -rf /var/lib/apt/lists/*
+ && apt-get install -y docker.io \
+ && rm -rf /var/lib/apt/lists/*
 
-# Vuelve al usuario jenkins
+# Añade el usuario jenkins al grupo docker
+RUN usermod -aG docker jenkins
+
 USER jenkins
+

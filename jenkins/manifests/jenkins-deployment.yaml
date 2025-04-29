@@ -18,7 +18,7 @@ spec:
         runAsUser: 1000
       containers:
       - name: jenkins
-        image: isavb03/jenkins-with-docker:1.0
+        image: isavb03/jenkins-with-docker:2.0
         ports:
         - containerPort: 8080
         - containerPort: 50000
