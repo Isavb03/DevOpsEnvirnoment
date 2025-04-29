@@ -25,6 +25,8 @@ spec:
         volumeMounts:
         - name: jenkins-data
           mountPath: /var/jenkins_home  # Montar el volumen aquí
+        - name: docker-sock
+          mountPath: /var/run/docker.sock
         env:
         - name: JAVA_OPTS
           value: "-Djenkins.install.runSetupWizard=false"
@@ -32,3 +34,6 @@ spec:
       - name: jenkins-data
         persistentVolumeClaim:
           claimName: jenkins-pvc
+      - name: docker-sock
+        hostPath:
+          path: /var/run/docker.sock
