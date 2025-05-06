@@ -1,18 +1,23 @@
 FROM jenkins/jenkins:lts-jdk17
+
 USER root
 
-# Instala Docker CLI
+# Instala Docker CLI y curl en una sola capa, y limpia cache
 RUN apt-get update \
- && apt-get install -y docker.io \
+ && apt-get install -y --no-install-recommends \
+      docker.io \
+      curl \
  && rm -rf /var/lib/apt/lists/*
 
-# Instalar kubectl
-RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" \
-    && chmod +x kubectl \
-    && mv kubectl /usr/local/bin/
+# Descarga, valida y instala kubectl en /usr/local/bin
+RUN K8S_VER="$(curl -L -s https://dl.k8s.io/release/stable.txt)" \
+ && curl -LO "https://dl.k8s.io/release/${K8S_VER}/bin/linux/amd64/kubectl" \
+ && install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl \
+ && rm kubectl
 
 # Añade el usuario jenkins al grupo docker
 RUN usermod -aG docker jenkins
 
 USER jenkins
+
 

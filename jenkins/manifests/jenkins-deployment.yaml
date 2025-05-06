@@ -18,7 +18,7 @@ spec:
         runAsUser: 1000
       containers:
       - name: jenkins
-        image: isavb03/jenkins-with-docker-kubectl:3.0
+        image: isavb03/jenkins-with-docker-kubectl:4.0
         ports:
         - containerPort: 8080
         - containerPort: 50000
@@ -28,8 +28,7 @@ spec:
         - name: docker-sock
           mountPath: /var/run/docker.sock
         - name: kubeconfig
-          mountPath: /var/jenkins_home/.kube/config  # Ruta exacta
-          subPath: config  # Nombre del archivo
+          mountPath: /var/jenkins_home/.kube/config
         env:
         - name: JAVA_OPTS
           value: "-Djenkins.install.runSetupWizard=false"
@@ -41,5 +40,6 @@ spec:
         hostPath:
           path: /var/run/docker.sock
       - name: kubeconfig
-        hosthPath:
-          path: /home/isavb03/.kube/config
+        hostPath:
+          path: /home/docker/.kube/config  # Ruta correcta en Minikube
+          type: File
