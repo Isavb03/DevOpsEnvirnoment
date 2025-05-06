@@ -9,4 +9,7 @@ spec:
   ports:
     - port: 8080
       targetPort: 8080
-      nodePort: 32000  # Acceso desde http://<MINIKUBE-IP>:32000
+      nodePort: 30200
+
+
+# 192.168.49.2
