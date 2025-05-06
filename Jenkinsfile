@@ -27,9 +27,10 @@ pipeline {
         maven "M3"
     }
 
-    // triggers {
-    //     GitHubPush()
-    // }
+    triggers {
+        // Poll every 5 minutes instead of using GitHub webhooks
+        pollSCM('*/5 * * * *')
+    }
 
     stages {
        

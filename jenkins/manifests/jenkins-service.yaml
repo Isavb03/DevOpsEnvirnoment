@@ -9,7 +9,7 @@ spec:
   ports:
     - port: 8080
       targetPort: 8080
-      nodePort: 30200
+      nodePort: 30300
 
 
 # 192.168.49.2
