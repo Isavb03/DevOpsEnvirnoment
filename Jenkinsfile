@@ -29,7 +29,7 @@ pipeline {
 
     triggers {
         // Poll every 5 minutes instead of using GitHub webhooks
-        pollSCM('*/5 * * * *')
+        pollSCM('*/2 * * * *')
     }
 
     stages {
