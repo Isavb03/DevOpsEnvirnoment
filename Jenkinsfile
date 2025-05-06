@@ -91,6 +91,7 @@ pipeline {
         stage('STEP 7: DEPLOY TO MINIKUBE'){
             steps{     
                 sh '''
+                    kubectl version --client
                     kubectl apply -f deployment.yaml
                     kubectl apply -f service.yaml
                 '''             

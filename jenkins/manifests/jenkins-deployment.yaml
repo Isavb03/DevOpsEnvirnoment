@@ -28,7 +28,8 @@ spec:
         - name: docker-sock
           mountPath: /var/run/docker.sock
         - name: kubeconfig
-          mountPath: /var/jenkins_home/.kube
+          mountPath: /var/jenkins_home/.kube/config  # Ruta exacta
+          subPath: config  # Nombre del archivo
         env:
         - name: JAVA_OPTS
           value: "-Djenkins.install.runSetupWizard=false"
@@ -41,5 +42,4 @@ spec:
           path: /var/run/docker.sock
       - name: kubeconfig
         hosthPath:
-          path: /home/isavb03/.kube
-          
+          path: /home/isavb03/.kube/config
