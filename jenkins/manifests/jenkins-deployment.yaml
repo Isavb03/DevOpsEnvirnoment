@@ -18,7 +18,7 @@ spec:
         runAsUser: 1000
       containers:
       - name: jenkins
-        image: isavb03/jenkins-with-docker:2.0
+        image: isavb03/jenkins-with-docker-kubectl:3.0
         ports:
         - containerPort: 8080
         - containerPort: 50000
@@ -27,6 +27,8 @@ spec:
           mountPath: /var/jenkins_home  # Montar el volumen aquí
         - name: docker-sock
           mountPath: /var/run/docker.sock
+        - name: kubeconfig
+          mountPath: /var/jenkins_home/.kube
         env:
         - name: JAVA_OPTS
           value: "-Djenkins.install.runSetupWizard=false"
@@ -37,3 +39,7 @@ spec:
       - name: docker-sock
         hostPath:
           path: /var/run/docker.sock
+      - name: kubeconfig
+        hosthPath:
+          path: /home/isavb03/.kube
+          
