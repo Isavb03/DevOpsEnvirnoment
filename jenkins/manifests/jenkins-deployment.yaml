@@ -19,7 +19,7 @@ spec:
         runAsGroup: 999
       containers:
       - name: jenkins
-        image: isavb03/jenkins-with-docker-kubectl:4.0
+        image: isavb03/jenkins-with-docker-kubectl:5.0
         ports:
         - containerPort: 8080
         - containerPort: 50000

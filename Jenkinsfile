@@ -91,8 +91,10 @@ pipeline {
         stage('STEP 7: DEPLOY TO MINIKUBE'){
             steps{     
                 sh '''
-                    kubectl version --client
-                    kubectl apply -f deployment.yaml
+                    export BUILD_ID=${BUILD_ID}
+                    envsubst < deployment.yaml > deployment-with-build-id.yaml
+                    
+                    kubectl apply -f deployment-with-build-id.yaml                    
                     kubectl apply -f service.yaml
                 '''             
             }                   

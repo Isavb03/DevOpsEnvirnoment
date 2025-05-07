@@ -15,6 +15,8 @@ RUN K8S_VER="$(curl -L -s https://dl.k8s.io/release/stable.txt)" \
  && install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl \
  && rm kubectl
 
+RUN apt-get update && apt-get install -y gettext
+
 # Añade el usuario jenkins al grupo docker
 RUN usermod -aG docker jenkins
 
