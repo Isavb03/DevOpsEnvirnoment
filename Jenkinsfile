@@ -90,21 +90,21 @@ pipeline {
 
         stage('STEP 7: DEPLOY TO MINIKUBE'){
             steps{     
-                sh '''
-                    export BUILD_ID=${BUILD_ID}
-                    envsubst < deployment.yaml > deployment-with-build-id.yaml
+                sh """
+                    export BUILD_ID=${env.BUILD_ID}
+                    envsubst '${BUILD_ID}' < deployment.yaml > deployment-with-build-id.yaml
                     
                     kubectl apply -f deployment-with-build-id.yaml                    
                     kubectl apply -f service.yaml
-                '''             
+                """             
             }                   
         }
         
         stage('STEP 8: CLEANUP'){
             steps{     
-                sh '''
+                sh """
                     rm -f deployment-with-build-id.yaml
-                '''             
+                """             
             }                      
         }      
 

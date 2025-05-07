@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: university-webapp      
-        image: isavb03/university-result-system:BUILD_ID_PLACEHOLDER
+        image: isavb03/university-result-system:${BUILD_ID} 
         ports:
         - containerPort: 8080        # Puerto del contenedor
