@@ -98,6 +98,14 @@ pipeline {
                     kubectl apply -f service.yaml
                 '''             
             }                   
+        }
+        
+        stage('STEP 8: CLEANUP'){
+            steps{     
+                sh '''
+                    rm -f deployment-with-build-id.yaml
+                '''             
+            }                      
         }      
 
     }
