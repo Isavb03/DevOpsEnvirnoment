@@ -14,8 +14,9 @@ spec:
     spec:
       serviceAccountName: jenkins-admin  # Usar el Service Account con permisos
       securityContext:
-        fsGroup: 1000
+        fsGroup: 999
         runAsUser: 1000
+        runAsGroup: 999
       containers:
       - name: jenkins
         image: isavb03/jenkins-with-docker-kubectl:4.0
@@ -39,6 +40,7 @@ spec:
       - name: docker-sock
         hostPath:
           path: /var/run/docker.sock
+          type: Socket
       # - name: kubeconfig
       #   hostPath:
       #     path: /home/docker/.kube/config
