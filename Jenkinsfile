@@ -91,10 +91,17 @@ pipeline {
         stage('STEP 7: DEPLOY TO MINIKUBE'){
             steps{     
                 sh """
-                    export BUILD_ID=${BUILD_ID}
-                    envsubst '$BUILD_ID' < deployment.yaml > deployment-with-build-id.yaml
+                    # Verify BUILD_ID is set
+                    echo "BUILD_ID=${env.BUILD_ID}"
 
-                    kubectl apply -f deployment-with-build-id.yaml                    
+                    # Substitute variable
+                    envsubst < deployment.yaml > deployment-with-build-id.yaml
+
+                    # Check the generated file
+                    cat deployment-with-build-id.yaml
+
+                    # Deploy
+                    kubectl apply -f deployment-with-build-id.yaml
                     kubectl apply -f service.yaml
                 """             
             }                   
