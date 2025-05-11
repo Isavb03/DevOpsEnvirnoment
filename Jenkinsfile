@@ -57,9 +57,11 @@ pipeline {
             steps{
                 withSonarQubeEnv('SonarQube') {
                     sh """
-                        mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar
                         mvn sonar:sonar \
+                            -Dsonar.host.url=http://sonarqube:9000 \
                             -Dsonar.projectKey=university-result-system \
+                            -Dsonar.projectName="University Result System" \
+                            -Dsonar.sourceEncoding=UTF-8 \
                             -Dsonar.java.binaries=target/classes \
                     """
                 }
