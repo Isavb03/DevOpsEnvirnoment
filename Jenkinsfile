@@ -54,16 +54,19 @@ pipeline {
         }
  
         stage('STEP 4: SONARQUBE'){
+            environment {
+                SONARQUBE_TOKEN = credentials('sonarqube-token')
+            }
             steps{
-                withSonarQubeEnv('SonarQube') {
-                    sh """
-                        mvn sonar:sonar \
-                            -Dsonar.host.url=http://sonarqube:9000 \
-                            -Dsonar.projectKey=university-result-system \
-                            -Dsonar.login=${sonarqube-token}
-                            -Dsonar.java.binaries=target/classes
-                    """
-                }
+            withSonarQubeEnv('SonarQube') {
+                sh """
+                mvn sonar:sonar \
+                    -Dsonar.host.url=http://sonarqube:9000 \
+                    -Dsonar.projectKey=university-result-system \
+                    -Dsonar.login=${SONARQUBE_TOKEN} \
+                    -Dsonar.java.binaries=target/classes
+                """
+            }
             }
         }
 
