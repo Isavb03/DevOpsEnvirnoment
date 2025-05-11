@@ -53,23 +53,25 @@ pipeline {
             }                      
         }
  
-        stage('STEP 4: SONARQUBE'){
+        stage('STEP 4: SONARQUBE') {
             environment {
-                SONARQUBE_TOKEN = credentials('sonarqube-token')
+            SONARQUBE_TOKEN = credentials('sonarqube-token')
             }
-            steps{
+            steps {
             withSonarQubeEnv('SonarQube') {
                 sh """
-                mvn sonar:sonar \
-                    -Dsonar.host.url=http://sonarqube:9000 \
-                    -Dsonar.projectKey=university-result-system \
-                    -Dsonar.login=${SONARQUBE_TOKEN} \
-                    -Dsonar.java.binaries=target/classes \
-                    -Dsonar.ws.timeout=600
+                mvn clean verify sonar:sonar \
+                -Dsonar.projectName='university-result-system' \
+                -Dsonar.host.url=http://sonarqube:9000 \
+                -Dsonar.projectKey=university-result-system \
+                -Dsonar.login=${SONARQUBE_TOKEN} \
+                -Dsonar.java.binaries=target/classes \
+                -Dsonar.ws.timeout=600
                 """
             }
             }
         }
+        
 
         stage('STEP 5: BUILD DOCKER IMAGE') {
             steps {
