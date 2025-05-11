@@ -53,7 +53,7 @@ pipeline {
             }                      
         }
  
-        stage('STEP 4: SONARQUBE'){ {
+        stage('STEP 4: SONARQUBE'){
             withSonarQubeEnv('SonarQube') {
                 sh """
                     mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar
