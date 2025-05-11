@@ -17,6 +17,11 @@ RUN K8S_VER="$(curl -L -s https://dl.k8s.io/release/stable.txt)" \
 
 RUN apt-get update && apt-get install -y gettext
 
+# Install Node.js
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
+    apt-get install -y nodejs && \
+    node -v && npm -v
+
 # Añade el usuario jenkins al grupo docker
 RUN usermod -aG docker jenkins
 
