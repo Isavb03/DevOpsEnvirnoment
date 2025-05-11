@@ -60,9 +60,8 @@ pipeline {
                         mvn sonar:sonar \
                             -Dsonar.host.url=http://sonarqube:9000 \
                             -Dsonar.projectKey=university-result-system \
-                            -Dsonar.projectName="University Result System" \
-                            -Dsonar.sourceEncoding=UTF-8 \
-                            -Dsonar.java.binaries=target/classes \
+                            -Dsonar.login=${sonarqube-token}
+                            -Dsonar.java.binaries=target/classes
                     """
                 }
             }
