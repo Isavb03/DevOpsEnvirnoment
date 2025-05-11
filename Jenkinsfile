@@ -54,13 +54,15 @@ pipeline {
         }
  
         stage('STEP 4: SONARQUBE'){
-            withSonarQubeEnv('SonarQube') {
-                sh """
-                    mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar
-                    mvn sonar:sonar \
-                        -Dsonar.projectKey=university-result-system \
-                        -Dsonar.java.binaries=target/classes \
-                """
+            steps{
+                withSonarQubeEnv('SonarQube') {
+                    sh """
+                        mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar
+                        mvn sonar:sonar \
+                            -Dsonar.projectKey=university-result-system \
+                            -Dsonar.java.binaries=target/classes \
+                    """
+                }
             }
         }
 
