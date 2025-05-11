@@ -64,7 +64,8 @@ pipeline {
                     -Dsonar.host.url=http://sonarqube:9000 \
                     -Dsonar.projectKey=university-result-system \
                     -Dsonar.login=${SONARQUBE_TOKEN} \
-                    -Dsonar.java.binaries=target/classes
+                    -Dsonar.java.binaries=target/classes \
+                    -Dsonar.ws.timeout=600
                 """
             }
             }
