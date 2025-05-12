@@ -53,8 +53,8 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - port: 9000
-    targetPort: 9000
-    nodePort: 31000
+    - protocol: TCP
+      port: 9000
+      targetPort: 9000
   selector:
     app: sonarqube
