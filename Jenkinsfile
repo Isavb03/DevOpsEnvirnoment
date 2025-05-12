@@ -59,7 +59,7 @@ pipeline {
             }
             steps {
             withSonarQubeEnv('SonarQube') {
-                sh """
+                sh '''
                 mvn clean verify sonar:sonar \
                 -Dsonar.exclusions=**/*.js,**/*.ts \
                 -Dsonar.nodejs.executable=/usr/bin/node \
@@ -69,7 +69,7 @@ pipeline {
                 -Dsonar.login=${SONARQUBE_TOKEN} \
                 -Dsonar.java.binaries=target/classes \
                 -Dsonar.ws.timeout=600
-                """
+                '''
             }
             }
         }
