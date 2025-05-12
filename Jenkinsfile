@@ -69,7 +69,7 @@ pipeline {
                 -Dsonar.token=${SONARQUBE_TOKEN} \
                 -Dsonar.java.binaries=target/classes \
                 -Dsonar.javascript.node.maxspace=8192 \  
-                -Dsonar.javascript.timeout=600 \         
+                -Dsonar.javascript.timeout=600         
                 '''
             }
             }
