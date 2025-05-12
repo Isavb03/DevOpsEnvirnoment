@@ -61,14 +61,15 @@ pipeline {
             withSonarQubeEnv('SonarQube') {
                 sh '''
                 mvn clean verify sonar:sonar \
-                -Dsonar.exclusions=**/*.js,**/*.ts \
+                -Dsonar.exclusions=**/*.js,**/*.ts,**/*.html \
                 -Dsonar.nodejs.executable=/usr/bin/node \
                 -Dsonar.projectName='university-result-system' \
                 -Dsonar.host.url=http://sonarqube:9000 \
                 -Dsonar.projectKey=university-result-system \
-                -Dsonar.login=${SONARQUBE_TOKEN} \
+                -Dsonar.token=${SONARQUBE_TOKEN} \
                 -Dsonar.java.binaries=target/classes \
-                -Dsonar.ws.timeout=600
+                -Dsonar.javascript.node.maxspace=8192 \  
+                -Dsonar.javascript.timeout=600 \         
                 '''
             }
             }
