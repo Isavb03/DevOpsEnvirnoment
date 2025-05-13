@@ -117,8 +117,8 @@ pipeline {
                     cat deployment-with-build-id.yaml
 
                     # Deploy
-                    kubectl apply -f deployment-with-build-id.yaml
-                    kubectl apply -f service.yaml
+                    kubectl apply -f deployment-with-build-id.yaml --namespace=default
+                    kubectl apply -f service.yaml --namespace=default
                 """             
             }                   
         }
