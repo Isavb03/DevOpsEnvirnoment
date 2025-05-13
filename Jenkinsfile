@@ -106,9 +106,7 @@ pipeline {
 
                     kubectl config view      
                     kubectl config current-context
-                    kubectl get pods
-
-                    kubectl version --short        
+                    kubectl get pods        
 
                     # Verify BUILD_ID is set
                     echo "BUILD_ID=${env.BUILD_ID}"
@@ -120,10 +118,12 @@ pipeline {
                     cat deployment-with-build-id.yaml
 
                     # Deploy
+                    # Deploy with explicit credentials
                     kubectl apply -f deployment-with-build-id.yaml \
-                        --token=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token) \
-                        --certificate-authority=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt \
-                        --server=https://kubernetes.default.svc
+                    --token=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token) \
+                    --certificate-authority=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt \
+                    --server=https://kubernetes.default.svc
+                    
                     kubectl apply -f service.yaml
                 """             
             }                   
