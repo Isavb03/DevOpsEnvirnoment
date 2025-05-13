@@ -102,8 +102,7 @@ pipeline {
 
         stage('STEP 7: DEPLOY TO MINIKUBE'){
             steps{     
-                sh '''
-
+                sh """
                     kubectl config view      
                     kubectl config current-context
                     ls -l /var/run/secrets/kubernetes.io/serviceaccount    
@@ -120,7 +119,7 @@ pipeline {
                     # Deploy
                     kubectl apply -f deployment-with-build-id.yaml
                     kubectl apply -f service.yaml
-                '''             
+                """             
             }                   
         }
         
