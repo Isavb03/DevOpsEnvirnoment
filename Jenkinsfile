@@ -118,12 +118,7 @@ pipeline {
                     cat deployment-with-build-id.yaml
 
                     # Deploy
-                    # Deploy with explicit credentials
-                    kubectl apply -f deployment-with-build-id.yaml \
-                    --token=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token) \
-                    --certificate-authority=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt \
-                    --server=https://kubernetes.default.svc
-                    
+                    kubectl apply -f deployment-with-build-id.yaml
                     kubectl apply -f service.yaml
                 """             
             }                   
