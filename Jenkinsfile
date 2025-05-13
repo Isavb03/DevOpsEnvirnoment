@@ -116,9 +116,11 @@ pipeline {
                     # Check the generated file
                     cat deployment-with-build-id.yaml
 
+                    export KUBECONFIG=/home/jenkins/.kube/config
+                    kubectl config use-context minikube
                     # Deploy
-                    kubectl apply -f deployment-with-build-id.yaml --namespace=default
-                    kubectl apply -f service.yaml --namespace=default
+                    kubectl apply -f deployment-with-build-id.yaml
+                    kubectl apply -f service.yaml
                 """             
             }                   
         }

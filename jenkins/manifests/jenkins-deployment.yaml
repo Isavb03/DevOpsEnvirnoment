@@ -12,6 +12,10 @@ spec:
       labels:
         app: jenkins
     spec:
+      volumes:
+        - name: kubeconfig
+          secret:
+          secretName: jenkins-kubeconfig
       serviceAccountName: jenkins-admin  # Usar el Service Account con permisos
       automountServiceAccountToken: true
       securityContext:
@@ -46,7 +50,8 @@ spec:
         - name: docker-sock
           mountPath: /var/run/docker.sock
         - name: kubeconfig
-          mountPath: /var/jenkins_home/.kube/config
+          mountPath: /home/jenkins/.kube
+          readOnly: true
         env:
         - name: JAVA_OPTS
           value: "-Djenkins.install.runSetupWizard=false"
