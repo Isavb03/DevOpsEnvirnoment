@@ -105,7 +105,8 @@ pipeline {
                 sh '''
 
                     kubectl config view      
-                    kubectl config current-context    
+                    kubectl config current-context
+                    ls -l /var/run/secrets/kubernetes.io/serviceaccount    
 
                     # Verify BUILD_ID is set
                     echo "BUILD_ID=${env.BUILD_ID}"
