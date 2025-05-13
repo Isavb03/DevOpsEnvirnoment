@@ -17,9 +17,25 @@ spec:
         fsGroup: 999
         runAsUser: 1000
         runAsGroup: 999
+      initContainers:
+      - name: fix-permissions
+        image: busybox
+        command: ["sh", "-c", "ls -ld /var/jenkins_home && chown -v -R 1000:1000 /var/jenkins_home"]
+        securityContext:
+          runAsUser: 0  # Root
+        volumeMounts:
+        - name: jenkins-data
+          mountPath: /var/jenkins_home
       containers:
       - name: jenkins
         image: isavb03/jenkins-with-docker-kubectl:8.0
+        resources:
+          requests:
+            memory: "1.5Gi"
+            cpu: "1"
+          limits:
+            memory: "2Gi"
+            cpu: "2"
         ports:
         - containerPort: 8080
         - containerPort: 50000

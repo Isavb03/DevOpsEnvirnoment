@@ -21,12 +21,12 @@ spec:
         - name: SONAR_ES_BOOTSTRAP_CHECKS_DISABLE
           value: "true"
         resources:
-          limits:
-            memory: 8Gi
-            cpu: "4"
           requests:
-            memory: 1Gi
-            cpu: "0.5"
+            memory: "2Gi"
+            cpu: "1"
+          limits:
+            memory: "2.5Gi"
+            cpu: "2"
         volumeMounts:
         - mountPath: /opt/sonarqube/data
           name: sonarqube-data
