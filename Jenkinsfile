@@ -118,26 +118,7 @@ pipeline {
                     cat deployment-with-build-id.yaml
 
                     # Deploy
-                    kubectl apply -f deployment-with-build-id.yaml \
-                    --kubeconfig <(echo "
-                        apiVersion: v1
-                        kind: Config
-                        clusters:
-                        - name: minikube
-                        cluster:
-                            certificate-authority: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-                            server: https://kubernetes.default.svc
-                        contexts:
-                        - name: default
-                        context:
-                            cluster: minikube
-                            user: jenkins-admin
-                        current-context: default
-                        users:
-                        - name: jenkins-admin
-                        user:
-                            token: $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
-                    ")
+                    kubectl apply -f deployment-with-build-id.yaml
                     kubectl apply -f service.yaml
                 '''             
             }                   
