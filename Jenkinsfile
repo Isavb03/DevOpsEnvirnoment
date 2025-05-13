@@ -105,8 +105,7 @@ pipeline {
                 sh '''
 
                     kubectl config view      
-                    kubectl config current-context
-                    kubectl get pods        
+                    kubectl config current-context    
 
                     # Verify BUILD_ID is set
                     echo "BUILD_ID=${env.BUILD_ID}"
