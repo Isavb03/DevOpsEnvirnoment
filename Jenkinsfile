@@ -102,11 +102,10 @@ pipeline {
 
         stage('STEP 7: DEPLOY TO MINIKUBE'){
             steps{     
-                sh """
+                sh '''
 
                     kubectl config view      
                     kubectl config current-context
-                    kubectl version --short
                     kubectl get pods        
 
                     # Verify BUILD_ID is set
@@ -140,7 +139,7 @@ pipeline {
                             token: $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
                     ")
                     kubectl apply -f service.yaml
-                """             
+                '''             
             }                   
         }
         
