@@ -45,8 +45,8 @@ spec:
           mountPath: /var/jenkins_home  # Montar el volumen aquí
         - name: docker-sock
           mountPath: /var/run/docker.sock
-        # - name: kubeconfig
-        #   mountPath: /var/jenkins_home/.kube/config
+        - name: kubeconfig
+          mountPath: /var/jenkins_home/.kube/config
         env:
         - name: JAVA_OPTS
           value: "-Djenkins.install.runSetupWizard=false"
@@ -58,7 +58,7 @@ spec:
         hostPath:
           path: /var/run/docker.sock
           type: Socket
-      # - name: kubeconfig
-      #   hostPath:
-      #     path: /home/docker/.kube/config
-      #     type: File
+      - name: kubeconfig
+        hostPath:
+          path: /home/docker/.kube
+          type: Directory
