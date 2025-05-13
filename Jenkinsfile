@@ -103,6 +103,11 @@ pipeline {
         stage('STEP 7: DEPLOY TO MINIKUBE'){
             steps{     
                 sh """
+
+                    kubectl config view      
+                    kubectl config current-context
+                    kubectl get pods        
+
                     # Verify BUILD_ID is set
                     echo "BUILD_ID=${env.BUILD_ID}"
 

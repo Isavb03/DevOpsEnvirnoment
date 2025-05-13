@@ -13,6 +13,7 @@ spec:
         app: jenkins
     spec:
       serviceAccountName: jenkins-admin  # Usar el Service Account con permisos
+      automountServiceAccountToken: true
       securityContext:
         fsGroup: 999
         runAsUser: 1000
