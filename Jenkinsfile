@@ -106,6 +106,7 @@ pipeline {
 
                     kubectl config view      
                     kubectl config current-context
+                    kubectl version --short
                     kubectl get pods        
 
                     # Verify BUILD_ID is set
