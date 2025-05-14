@@ -61,7 +61,6 @@ pipeline {
             withSonarQubeEnv('SonarQube') {
                 sh '''
                 mvn clean verify sonar:sonar                
-                -Dsonar.nodejs.executable=/usr/bin/node \
                 -Dsonar.projectName='university-result-system' \
                 -Dsonar.host.url=http://sonarqube:9000 \
                 -Dsonar.projectKey=university-result-system \
