@@ -68,6 +68,8 @@ pipeline {
                         -Dsonar.java.binaries=target/classes \
                         -Dsonar.javascript.node.maxspace=4096 \
                         -Dsonar.javascript.timeout=1800 \
+                        -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \
+                        -Dsonar.java.coveragePlugin=jacoco \
                         -Dsonar.dependencyCheck.reportPath=target/dependency-check-report.xml \
                         -Dsonar.dependencyCheck.htmlReportPath=target/dependency-check-report.html \
                         -Dsonar.exclusions=**/vendor/**,**/node_modules/**,**/*.spec.ts \
@@ -148,6 +150,14 @@ pipeline {
       always {
         junit allowEmptyResults: true, testResults: '**/target/surefire-reports/TEST-*.xml'
 
+        // Collect JaCoCo code coverage results
+        jacoco(
+            execPattern: 'target/jacoco.exec',
+            classPattern: 'target/classes',
+            sourcePattern: 'src/main/java',
+            exclusionPattern: 'src/test*'
+        )
+        
         withSonarQubeEnv('SonarQube') {
             script {
                 def qg = waitForQualityGate(abortPipeline: false)
