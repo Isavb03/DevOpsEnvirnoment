@@ -23,7 +23,7 @@ pipeline {
 
     triggers {
         // Poll every 5 minutes instead of using GitHub webhooks
-        pollSCM('*/2 * * * *')
+        pollSCM('*/1 * * * *')
     }
 
     stages {
@@ -59,8 +59,8 @@ pipeline {
             }
             steps {
             withSonarQubeEnv('SonarQube') {
-                sh '''
-                mvn clean verify sonar:sonar                
+            sh '''
+                mvn clean verify sonar:sonar \
                 -Dsonar.projectName='university-result-system' \
                 -Dsonar.host.url=http://sonarqube:9000 \
                 -Dsonar.projectKey=university-result-system \
@@ -68,7 +68,7 @@ pipeline {
                 -Dsonar.java.binaries=target/classes \
                 -Dsonar.javascript.node.maxspace=16384 \
                 -Dsonar.javascript.timeout=1800
-                '''
+            '''
             }
             }
         }
