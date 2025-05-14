@@ -55,21 +55,27 @@ pipeline {
  
         stage('STEP 4: SONARQUBE') {
             environment {
-            SONARQUBE_TOKEN = credentials('sonarqube-token')
+                SONARQUBE_TOKEN = credentials('sonarqube-token')
             }
             steps {
-            withSonarQubeEnv('SonarQube') {
-            sh '''
-                mvn clean verify sonar:sonar \
-                -Dsonar.projectName='university-result-system' \
-                -Dsonar.host.url=http://sonarqube:9000 \
-                -Dsonar.projectKey=university-result-system \
-                -Dsonar.token=${SONARQUBE_TOKEN} \
-                -Dsonar.java.binaries=target/classes \
-                -Dsonar.javascript.node.maxspace=16384 \
-                -Dsonar.javascript.timeout=1800
-            '''
-            }
+                withSonarQubeEnv('SonarQube') {
+                    sh '''
+                        mvn clean verify sonar:sonar \
+                        -Dsonar.projectName='university-result-system' \
+                        -Dsonar.host.url=http://sonarqube:9000 \
+                        -Dsonar.projectKey=university-result-system \
+                        -Dsonar.token=${SONARQUBE_TOKEN} \
+                        -Dsonar.java.binaries=target/classes \
+                        -Dsonar.javascript.node.maxspace=8192 \
+                        -Dsonar.javascript.timeout=1800 \
+                        -Dsonar.dependencyCheck.reportPath=target/dependency-check-report.xml \
+                        -Dsonar.dependencyCheck.htmlReportPath=target/dependency-check-report.html \
+                        -Dsonar.exclusions=**/vendor/**,**/node_modules/**,**/*.spec.ts \
+                        -Dsonar.test.inclusions=**/*Test.java,**/*Tests.java,**/*IT.java \
+                        -Dsonar.qualitygate.wait=true
+                        -Dsonar.qualitygate.wait=true
+                    '''
+                }
             }
         }
         
@@ -138,17 +144,22 @@ pipeline {
       // failed, record the test results and archive the jar file.
       success{
         archiveArtifacts 'target/*.war'
+        echo "Build ${currentBuild.fullDisplayName} completed successfully!! :D"
       }
-    //   always {
-    //     junit '**/target/surefire-reports/TEST-*.xml'
-    //   }
-      // changed{
-      //     emailext subject: "Job '${JOB_NAME}' (${BUILD_NUMBER})",
-      //     body: "Please go to ${BUILD_URL} and verify the build",
-      //     attachLog: true,
-      //     compressLog: true,
-      //     to: 'isabel.valles-bertomeu.external@capgemini.com'
-      // }
+      always {
+        junit allowEmptyResults: true, testResults: '**/target/surefire-reports/TEST-*.xml'
+
+        withSonarQubeEnv('SonarQube') {
+            script {
+                def qg = waitForQualityGate(abortPipeline: false)
+                if (qg.status != 'OK') {
+                    echo "SonarQube Quality Gate status: ${qg.status}"
+                }
+            }
+        }
+      
+      }
+
       failure{
         echo "Ha fallado el build número ${currentBuild.fullDisplayName}"
       }      
