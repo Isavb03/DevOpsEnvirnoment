@@ -66,13 +66,12 @@ pipeline {
                         -Dsonar.projectKey=university-result-system \
                         -Dsonar.token=${SONARQUBE_TOKEN} \
                         -Dsonar.java.binaries=target/classes \
-                        -Dsonar.javascript.node.maxspace=8192 \
+                        -Dsonar.javascript.node.maxspace=4096 \
                         -Dsonar.javascript.timeout=1800 \
                         -Dsonar.dependencyCheck.reportPath=target/dependency-check-report.xml \
                         -Dsonar.dependencyCheck.htmlReportPath=target/dependency-check-report.html \
                         -Dsonar.exclusions=**/vendor/**,**/node_modules/**,**/*.spec.ts \
                         -Dsonar.test.inclusions=**/*Test.java,**/*Tests.java,**/*IT.java \
-                        -Dsonar.qualitygate.wait=true
                         -Dsonar.qualitygate.wait=true
                     '''
                 }
