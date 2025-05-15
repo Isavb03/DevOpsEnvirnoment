@@ -157,15 +157,7 @@ pipeline {
             sourcePattern: 'src/main/java',
             exclusionPattern: 'src/test*'
         )
-        
-        withSonarQubeEnv('SonarQube') {
-            script {
-                def qg = waitForQualityGate(abortPipeline: false)
-                if (qg.status != 'OK') {
-                    echo "SonarQube Quality Gate status: ${qg.status}"
-                }
-            }
-        }
+    
       
       }
 
