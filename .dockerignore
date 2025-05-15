@@ -1,5 +1,0 @@
-# Ignora archivos temporales de IDE
-*.iml
-.idea/
-# Pero NO ignores target/ROOT.war
-!target/ROOT.war
