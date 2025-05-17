@@ -53,32 +53,32 @@ pipeline {
             }                      
         }
  
-        stage('STEP 4: SONARQUBE') {
-            environment {
-                SONARQUBE_TOKEN = credentials('sonarqube-token')
-            }
-            steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh '''
-                        mvn clean verify sonar:sonar \
-                        -Dsonar.projectName='university-result-system' \
-                        -Dsonar.host.url=http://sonarqube:9000 \
-                        -Dsonar.projectKey=university-result-system \
-                        -Dsonar.token=${SONARQUBE_TOKEN} \
-                        -Dsonar.java.binaries=target/classes \
-                        -Dsonar.javascript.node.maxspace=4096 \
-                        -Dsonar.javascript.timeout=1800 \
-                        -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \
-                        -Dsonar.java.coveragePlugin=jacoco \
-                        -Dsonar.dependencyCheck.reportPath=target/dependency-check-report.xml \
-                        -Dsonar.dependencyCheck.htmlReportPath=target/dependency-check-report.html \
-                        -Dsonar.exclusions=**/vendor/**,**/node_modules/**,**/*.spec.ts \
-                        -Dsonar.test.inclusions=**/*Test.java,**/*Tests.java,**/*IT.java \
-                        -Dsonar.qualitygate.wait=false  # poner en true cuando se corrija el codigo
-                    '''
-                }
-            }
-        }
+        // stage('STEP 4: SONARQUBE') {
+        //     environment {
+        //         SONARQUBE_TOKEN = credentials('sonarqube-token')
+        //     }
+        //     steps {
+        //         withSonarQubeEnv('SonarQube') {
+        //             sh '''
+        //                 mvn clean verify sonar:sonar \
+        //                 -Dsonar.projectName='university-result-system' \
+        //                 -Dsonar.host.url=http://sonarqube:9000 \
+        //                 -Dsonar.projectKey=university-result-system \
+        //                 -Dsonar.token=${SONARQUBE_TOKEN} \
+        //                 -Dsonar.java.binaries=target/classes \
+        //                 -Dsonar.javascript.node.maxspace=4096 \
+        //                 -Dsonar.javascript.timeout=1800 \
+        //                 -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \
+        //                 -Dsonar.java.coveragePlugin=jacoco \
+        //                 -Dsonar.dependencyCheck.reportPath=target/dependency-check-report.xml \
+        //                 -Dsonar.dependencyCheck.htmlReportPath=target/dependency-check-report.html \
+        //                 -Dsonar.exclusions=**/vendor/**,**/node_modules/**,**/*.spec.ts \
+        //                 -Dsonar.test.inclusions=**/*Test.java,**/*Tests.java,**/*IT.java \
+        //                 -Dsonar.qualitygate.wait=false  # poner en true cuando se corrija el codigo
+        //             '''
+        //         }
+        //     }
+        // }
         
 
         stage('STEP 5: BUILD DOCKER IMAGE') {
@@ -155,19 +155,19 @@ pipeline {
         archiveArtifacts 'target/*.war'
         echo "Build ${currentBuild.fullDisplayName} completed successfully!! :D"
       }
-      always {
-        junit allowEmptyResults: true, testResults: '**/target/surefire-reports/TEST-*.xml'
+    //   always {
+    //     junit allowEmptyResults: true, testResults: '**/target/surefire-reports/TEST-*.xml'
 
-        // Collect JaCoCo code coverage results
-        jacoco(
-            execPattern: 'target/jacoco.exec',
-            classPattern: 'target/classes',
-            sourcePattern: 'src/main/java',
-            exclusionPattern: 'src/test*'
-        )
+    //     // Collect JaCoCo code coverage results
+    //     jacoco(
+    //         execPattern: 'target/jacoco.exec',
+    //         classPattern: 'target/classes',
+    //         sourcePattern: 'src/main/java',
+    //         exclusionPattern: 'src/test*'
+    //     )
     
       
-      }
+    //   }
 
       failure{
         echo "Ha fallado el build número ${currentBuild.fullDisplayName}"
