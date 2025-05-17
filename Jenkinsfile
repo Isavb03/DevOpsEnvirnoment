@@ -123,9 +123,17 @@ pipeline {
 
                     export KUBECONFIG=/home/jenkins/.kube/config
                     
+                    # Aplicar primero el servicio de autenticación
+                    
+                    kubectl apply -f microservicios/admin-service/deployment-auth.yaml
+                    kubectl apply -f microservicios/admin-service/service-auth.yaml
+
                     # Deploy
                     kubectl apply -f deployment-with-build-id.yaml
                     kubectl apply -f service.yaml
+
+                    # Verificar conexión
+                    kubectl get svc admin-service -o wide
                 """             
             }                   
         }
