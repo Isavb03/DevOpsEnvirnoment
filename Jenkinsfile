@@ -31,7 +31,7 @@ pipeline {
         stage('Step 1: LOAD SCM'){
             steps {
                 // Get some code from a GitHub repository
-                git branch: 'feature/initialconfig', url: 'https://github.com/Isavb03/DevOpsEnvirnoment.git'
+                git branch: 'feature/service1.0', url: 'https://github.com/Isavb03/DevOpsEnvirnoment.git'
 
             }
         }
