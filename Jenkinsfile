@@ -108,6 +108,11 @@ pipeline {
         stage('STEP 7: DEPLOY TO MINIKUBE'){
             steps{     
                 sh """
+
+                    git clone https://github.com/Isavb03/admin-service.git
+
+                    ls -l admin-service/
+
                     kubectl config view      
                     kubectl config current-context
                     ls -l /var/run/secrets/kubernetes.io/serviceaccount    
@@ -125,8 +130,10 @@ pipeline {
                     
                     # Aplicar primero el servicio de autenticación
                     
-                    kubectl apply -f microservicios/admin-service/deployment-auth.yaml
-                    kubectl apply -f microservicios/admin-service/service-auth.yaml
+                    kubectl apply -f admin-service/deployment-auth.yaml
+                    kubectl apply -f admin-service/service-auth.yaml
+
+                    kubectl wait --for=condition=available --timeout=300s deployment/admin-service
 
                     # Deploy
                     kubectl apply -f deployment-with-build-id.yaml
