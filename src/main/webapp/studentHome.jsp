@@ -1,10 +1,10 @@
 <%@page import="java.sql.*" %>
-      <%@page import="project.ConnectionProvider" %>
+      <%@page import="project.DatabaseConfig" %>
       <%
       try{
     	  
     	  String rollNo=request.getParameter("rollNo");
-    	  Connection con=ConnectionProvider.getCon();
+    	  Connection con=DatabaseConfig.getCon();
     		Statement st=con.createStatement();
     		ResultSet rs=st.executeQuery("select * from student inner join result where student.reg_number=result.reg_number and student.reg_number='"+rollNo+"'");
     		if (rs.next()){

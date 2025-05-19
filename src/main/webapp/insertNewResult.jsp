@@ -1,4 +1,4 @@
-<%@page import="project.ConnectionProvider" %>
+<%@page import="project.DatabaseConfig" %>
 <%@page import="java.sql.*" %>
 
 <%
@@ -16,7 +16,7 @@ String s6=request.getParameter("s6");
 
 try{
 	
-	Connection con=ConnectionProvider.getCon();
+	Connection con=DatabaseConfig.getCon();
 	Statement st=con.createStatement();
 	st.executeUpdate("insert into result values('"+IndexNo+"','"+semester+"','"+s1+"','"+s2+"','"+s3+"','"+s4+"','"+s5+"','"+s6+"')");
 	response.sendRedirect("adminHome.jsp");

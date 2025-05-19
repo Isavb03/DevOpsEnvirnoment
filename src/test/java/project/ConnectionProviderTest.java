@@ -1,7 +1,7 @@
 package test.java.project;
 
 import org.junit.jupiter.api.Test;
-import project.ConnectionProvider;
+import project.DatabaseConfig;
 
 import java.sql.Connection;
 

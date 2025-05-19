@@ -1,4 +1,4 @@
-<%@page import="project.ConnectionProvider" %>
+<%@page import="project.DatabaseConfig" %>
 <%@page import="java.sql.*" %>
 <%
 String faculty=request.getParameter("faculty");
@@ -12,7 +12,7 @@ String gender=request.getParameter("gender");
 
 try{
 	
-	Connection con=ConnectionProvider.getCon();
+	Connection con=DatabaseConfig.getCon();
 	Statement st=con.createStatement();
 	st.executeUpdate("insert into student values('"+faculty+"','"+degree+"','"+RegNo+"','"+name+"','"+NICno+"','"+gender+"')");
 	response.sendRedirect("adminHome.jsp");
