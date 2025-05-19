@@ -21,7 +21,13 @@ public class DatabaseConfig {
         dataSource = new HikariDataSource(config);
     }
 
+    // Original method
+    public static Connection getConnection() throws SQLException {
+        return dataSource.getConnection();
+    }
+    
+    // Add the getCon() method that's used in JSP files
     public static Connection getCon() throws SQLException {
-        return dataSource.getCon();
+        return getConnection(); // Just call the original method
     }
 }
