@@ -108,7 +108,7 @@ pipeline {
         stage('STEP 7: DEPLOY TO MINIKUBE'){
             steps{     
                 sh """
-
+                    rm -rf admin-service
                     git clone https://github.com/Isavb03/admin-service.git
 
                     ls -l admin-service/
@@ -149,6 +149,7 @@ pipeline {
             steps{     
                 sh """
                     rm -f deployment-with-build-id.yaml
+                    rm -rf admin-service
                 """             
             }                      
         }      
