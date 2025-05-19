@@ -122,15 +122,17 @@ pipeline {
 
                     # Substitute variable
                     envsubst < deployment.yaml > deployment-with-build-id.yaml
+                    envsubst < admin-service/deployment-auth.yaml > deployment-auth-with-build-id.yaml
+
 
                     # Check the generated file
                     cat deployment-with-build-id.yaml
+                    cat deployment-auth-with-build-id.yaml
 
                     export KUBECONFIG=/home/jenkins/.kube/config
                     
-                    # Aplicar primero el servicio de autenticación
-                    
-                    kubectl apply -f admin-service/deployment-auth.yaml
+                    # Aplicar primero el servicio de autenticación                    
+                    kubectl apply -f admin-service/deployment-auth-with-build-id.yaml
                     kubectl apply -f admin-service/service-auth.yaml
 
                     kubectl wait --for=condition=available --timeout=300s deployment/admin-service
