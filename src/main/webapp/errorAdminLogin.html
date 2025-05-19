@@ -30,7 +30,7 @@
         const formData = new URLSearchParams(new FormData(document.getElementById('loginForm')));
         
         // Use the same microservice URL as in adminLogin.html
-        fetch('http://admin-service:8081/auth/login', {
+        fetch('http://127.0.0.1:33699/auth/login', {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: formData
