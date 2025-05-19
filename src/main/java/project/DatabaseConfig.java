@@ -1,6 +1,8 @@
-package main.java.project;
+package project;
 
 import java.sql.*;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 
 public class DatabaseConfig {
     private static final String DB_URL = "jdbc:mysql://mysql-service:3306/university";
