@@ -17,7 +17,7 @@ spec:
         image: isavb03/university-result-system:${BUILD_ID}
         env:
         - name: AUTH_SERVICE_URL
-          value: "http://admin-service:8081" # Nombre del servicio Kubernetes
+          value: "http://admin-service:8080" # Nombre del servicio Kubernetes
         - name: DB_USER
           valueFrom:
             secretKeyRef:
