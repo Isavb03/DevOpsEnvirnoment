@@ -108,10 +108,10 @@ pipeline {
         stage('STEP 7: DEPLOY TO MINIKUBE'){
             steps{     
                 sh """
-                    // rm -rf admin-service
-                    // git clone https://github.com/Isavb03/admin-service.git
+                    # rm -rf admin-service
+                    # git clone https://github.com/Isavb03/admin-service.git
 
-                    // ls -l admin-service/
+                    # ls -l admin-service/
 
                     kubectl config view      
                     kubectl config current-context
@@ -122,20 +122,20 @@ pipeline {
 
                     # Substitute variable
                     envsubst < deployment.yaml > deployment-with-build-id.yaml
-                    // envsubst < admin-service/deployment-auth.yaml > deployment-auth-with-build-id.yaml
+                    # envsubst < admin-service/deployment-auth.yaml > deployment-auth-with-build-id.yaml
 
 
                     # Check the generated file
                     cat deployment-with-build-id.yaml
-                    // cat deployment-auth-with-build-id.yaml
+                    # cat deployment-auth-with-build-id.yaml
 
                     export KUBECONFIG=/home/jenkins/.kube/config
                     
-                    // # Aplicar primero el servicio de autenticación                    
-                    // kubectl apply -f deployment-auth-with-build-id.yaml
-                    // kubectl apply -f admin-service/service-auth.yaml
+                                       
+                    # kubectl apply -f deployment-auth-with-build-id.yaml
+                    # kubectl apply -f admin-service/service-auth.yaml
 
-                    // kubectl wait --for=condition=available --timeout=300s deployment/admin-service
+                    # kubectl wait --for=condition=available --timeout=300s deployment/admin-service
 
                     # Deploy
                     kubectl apply -f deployment-with-build-id.yaml
