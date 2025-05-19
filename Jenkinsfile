@@ -151,7 +151,7 @@ pipeline {
             steps{     
                 sh """
                     rm -f deployment-with-build-id.yaml
-                    // rm -rf admin-service
+                    # rm -rf admin-service
                 """             
             }                      
         }      
