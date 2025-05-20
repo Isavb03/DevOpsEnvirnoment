@@ -1,5 +1,7 @@
-<%@page import="project.DatabaseConfig" %>
+
 <%@page import="java.sql.*" %>
+<%@ page import="java.sql.Connection,java.sql.Statement,java.sql.ResultSet" %>
+<%@page import="project.DatabaseConfig" %>
 <%
 String faculty=request.getParameter("faculty");
 String degree=request.getParameter("degree");
