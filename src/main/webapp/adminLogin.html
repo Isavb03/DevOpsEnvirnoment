@@ -26,7 +26,7 @@
     function attemptLogin() {
         const formData = new URLSearchParams(new FormData(document.getElementById('loginForm')));
         
-        fetch('/admin-service/auth/login', {
+        fetch('/auth-service/auth/login', {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: formData
