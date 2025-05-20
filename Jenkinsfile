@@ -34,7 +34,7 @@ pipeline {
                 git branch: 'feature/service1.0', url: 'https://github.com/Isavb03/DevOpsEnvirnoment.git'
 
             }
-        }
+        } 
        
         stage('Step 2: BUILD') {
             steps {
