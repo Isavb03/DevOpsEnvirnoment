@@ -5,6 +5,9 @@ import java.sql.*;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
 public class ConnectionProvider {
 	
 	
@@ -21,6 +24,7 @@ public class ConnectionProvider {
         config.setPassword(DB_PASSWORD);
         config.setMaximumPoolSize(10);
         config.setMinimumIdle(2);
+        config.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dataSource = new HikariDataSource(config);
     }
 
