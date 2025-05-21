@@ -16,7 +16,7 @@ String s6=request.getParameter("s6");
 
 try{
 	
-	Connection con=DatabaseConfig.getCon();
+	Connection con=ConnectionProvider.getCon();
 	Statement st=con.createStatement();
 	st.executeUpdate("insert into result values('"+IndexNo+"','"+semester+"','"+s1+"','"+s2+"','"+s3+"','"+s4+"','"+s5+"','"+s6+"')");
 	response.sendRedirect("adminHome.jsp");
@@ -24,7 +24,8 @@ try{
 }catch(Exception e)
 {
 	
-	System.out.println(e);
+	System.out.println("Error in insertNewResult.jsp: " + e.getMessage());
+	e.printStackTrace();
 }
 
 
