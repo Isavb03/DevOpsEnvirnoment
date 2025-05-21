@@ -15,6 +15,7 @@ spec:
       containers:
       - name: mysql
         image: mysql:8.0
+        command: [ "mysqld", "--skip-name-resolve=OFF" ] # Force override
         env:
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
@@ -38,7 +39,13 @@ spec:
         volumeMounts:
         - name: mysql-storage
           mountPath: /var/lib/mysql
+        - name: mysql-config
+          mountPath: /etc/mysql/conf.d/z-custom.cnf # Mount as a file, not a directory
+          subPath: z-custom.cnf # Must match the ConfigMap key
       volumes:
       - name: mysql-storage
         persistentVolumeClaim:
           claimName: mysql-pvc
+      - name: mysql-config
+        configMap:
+          name: mysql-custom-config
