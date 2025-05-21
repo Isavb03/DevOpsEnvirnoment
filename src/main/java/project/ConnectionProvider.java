@@ -18,14 +18,19 @@ public class ConnectionProvider {
     private static HikariDataSource dataSource;
 
     static {
-        HikariConfig config = new HikariConfig();
-        config.setJdbcUrl(DB_URL);
-        config.setUsername(DB_USER);
-        config.setPassword(DB_PASSWORD);
-        config.setMaximumPoolSize(10);
-        config.setMinimumIdle(2);
-        config.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource = new HikariDataSource(config);
+        try {
+            HikariConfig config = new HikariConfig();
+            config.setJdbcUrl(DB_URL);
+            config.setUsername(DB_USER);
+            config.setPassword(DB_PASSWORD);
+            config.setMaximumPoolSize(10);
+            config.setMinimumIdle(2);
+            config.setDriverClassName("com.mysql.cj.jdbc.Driver");
+            dataSource = new HikariDataSource(config);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ExceptionInInitializerError(e);
+        }
     }
 
     // Original method
