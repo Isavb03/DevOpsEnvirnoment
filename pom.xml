@@ -63,6 +63,12 @@
             <version>3.2.5</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>compile</scope> <!-- Change from 'runtime' to 'compile' -->
+        </dependency>
+
     </dependencies>
 
     <build>
