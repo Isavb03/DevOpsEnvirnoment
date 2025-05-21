@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: university-result-system  # Nombre descriptivo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: university-result-system  # Coherencia en labels
+  template:
+    metadata:
+      labels:
+        app: university-result-system  # Mismo label
+    spec:
+      containers:
+      - name: university-webapp      
+        image: isavb03/university-result-system:${BUILD_ID}
+        env:
+        - name: AUTH_SERVICE_URL
+          value: "http://admin-service:8080" # Nombre del servicio Kubernetes
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secrets
+              key: username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secrets
+              key: password        
+        ports:
+        - containerPort: 8080        # Puerto del contenedor

@@ -121,7 +121,7 @@ pipeline {
                     echo "BUILD_ID=${env.BUILD_ID}"
 
                     # Substitute variable
-                    envsubst < deployment.yaml > deployment-with-build-id.yaml
+                    envsubst < manifests/deployment.yaml > deployment-with-build-id.yaml
                     # envsubst < admin-service/deployment-auth.yaml > deployment-auth-with-build-id.yaml
 
 
@@ -139,7 +139,7 @@ pipeline {
 
                     # Deploy
                     kubectl apply -f deployment-with-build-id.yaml
-                    kubectl apply -f service.yaml
+                    kubectl apply -f manifests/service.yaml
 
                     # Verificar conexión
                     kubectl get svc admin-service -o wide
