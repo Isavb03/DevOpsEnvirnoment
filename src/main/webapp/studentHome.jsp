@@ -1,5 +1,6 @@
 <%@page import="java.sql.*" %>
-      <%@page import="project.DatabaseConfig" %>
+      <%@page import="project.ConnectionProvider" %>
+
       <%
       try{
     	  

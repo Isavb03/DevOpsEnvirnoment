@@ -1,4 +1,4 @@
-<%@page import="project.DatabaseConfig" %>
+<%@page import="project.ConnectionProvider" %>
 <%@page import="java.sql.*" %>
 
 <%
