@@ -24,7 +24,8 @@ try{
 }catch(Exception e)
 {
 	
-	System.out.println(e);
+	System.out.println("Error in insertNewResult.jsp: " + e.getMessage());
+	e.printStackTrace();
 }
 
 

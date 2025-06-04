@@ -3,15 +3,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">   
   <link rel="stylesheet" type="text/css" href="style.css">  
   <style>
-  h3{
-color:red;
-}
-  .login-box{
+  h3 {
+    color: red;
+  }
+  .login-box {
     height: 400px;
-}</style>
+  }
+  </style>
 </head>
 <body>
-    <form method="post" action="adminLoginAction.jsp">
+    <form id="loginForm" onsubmit="event.preventDefault(); attemptLogin();">
     <div class="login-box">
     <img src="user.png" class="avatar">
         <h3><center>Incorrect Username or Password</center></h3>
@@ -19,9 +20,33 @@ color:red;
             <input type="text" name="username" placeholder="Enter Username" required="required">
             <p>Password</p>
             <input type="password" name="password" placeholder="Enter Password" required="required">
-            <input type="submit" name="submit" value="Login">
+            <button type="submit">Login</button>
             </form>
               <center><h1><a href="index.html">Back</a></h1></center>
         </div>   
-    </body>
+    
+    <script>
+    function attemptLogin() {
+        const formData = new URLSearchParams(new FormData(document.getElementById('loginForm')));
+        
+        // Use the same microservice URL as in adminLogin.html
+        fetch('http://localhost:8081/auth/login', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body: formData
+        })
+        .then(response => {
+            if(response.ok) {
+                window.location.href = 'adminHome.jsp';
+            } else {
+                window.location.href = 'errorAdminLogin.html';
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            window.location.href = 'errorAdminLogin.html';
+        });
+    }
+    </script>
+</body>
 </html>

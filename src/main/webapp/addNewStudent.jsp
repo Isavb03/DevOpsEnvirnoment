@@ -20,7 +20,8 @@ try{
 }catch(Exception e)
 {
 	
-	System.out.println(e);
+	System.out.println("Error in addNewStudent.jsp: " + e.getMessage());
+	e.printStackTrace();
 }
 
 

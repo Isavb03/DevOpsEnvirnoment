@@ -251,10 +251,11 @@
       <tbody>
       
       <%@page import="java.sql.*" %>
-      <%@page import="project.ConnectionProvider" %>
+      <%@ page import="java.sql.Connection,java.sql.Statement,java.sql.ResultSet" %>
+      <%@page import="project.DatabaseConfig" %>
       <%
       try{
-    	  Connection con=ConnectionProvider.getCon();
+    	  Connection con=DatabaseConfig.getCon();
     		Statement st=con.createStatement();
     		ResultSet rs=st.executeQuery("select * from student");
     		while(rs.next())
@@ -311,7 +312,7 @@
       <tbody>
          <%
       try{
-    	  Connection con=ConnectionProvider.getCon();
+    	  Connection con=DatabaseConfig.getCon();
     		Statement st=con.createStatement();
     		ResultSet rs=st.executeQuery("select * from result");
     		while(rs.next())
