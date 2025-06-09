@@ -111,8 +111,7 @@
                 <version>9.0.10</version>
                 <configuration>
                     <formats>XML</formats>
-                    <skipOssIndex>true</skipOssIndex>
-                    <skipNvdUpdate>true</skipNvdUpdate>
+                    <nvdApiKey>${env.NVD_API_KEY}</nvdApiKey>
                 </configuration>
                 <executions>
                     <execution>
