@@ -37,6 +37,20 @@ pipeline {
                 '''             
             }                      
         }
+
+        stage('STEP 3.5: DEPENDENCY-CHECK INIT') {
+            agent { label 'maven' }
+            environment {
+                NVD_API_KEY = credentials('nvd-api-key')
+            }
+            steps {
+                sh '''
+                mvn org.owasp:dependency-check-maven:9.0.10:update-only \
+                    -Dnvd.api.key=${NVD_API_KEY}
+                '''
+            }
+        }
+
  
         stage('STEP 4: SONARQUBE') {
             environment {
@@ -46,9 +60,6 @@ pipeline {
             steps {
                 withSonarQubeEnv('SonarQube') {
                     sh '''
-                        echo "NVD key length = ${#NVD_API_KEY}"
-                        # optionally mask the middle if you really need to see part of it
-                        echo "NVD key prefix = ${NVD_API_KEY:0:4}****"
                         mvn clean verify sonar:sonar \
                         -Dsonar.projectName='university-result-system' \
                         -Dsonar.host.url=http://sonarqube:9000 \
