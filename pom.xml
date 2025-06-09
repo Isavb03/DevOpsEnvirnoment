@@ -112,6 +112,10 @@
                 <configuration>
                     <formats>XML</formats>
                     <nvdApiKey>${env.NVD_API_KEY}</nvdApiKey>
+                    <!-- wait longer between pages -->
+                    <nvdApiDelay>10000</nvdApiDelay>
+                    <!-- retry more times before giving up -->
+                    <nvdMaxRetryCount>15</nvdMaxRetryCount>
                 </configuration>
                 <executions>
                     <execution>

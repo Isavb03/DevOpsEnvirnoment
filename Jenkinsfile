@@ -60,7 +60,7 @@ pipeline {
                         -Dsonar.exclusions=**/vendor/**,**/node_modules/**,**/*.spec.ts \
                         -Dsonar.test.inclusions=**/*Test.java,**/*Tests.java,**/*IT.java \
                         -Dsonar.qualitygate.wait=false \
-                        -DnvdApiKey=${NVD_API_KEY}
+                        -Dnvd.api.key=${NVD_API_KEY}
                     '''
                 }
             }
