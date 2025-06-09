@@ -56,7 +56,6 @@ pipeline {
                         -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \
                         -Dsonar.java.coveragePlugin=jacoco \
                         -Dsonar.dependencyCheck.reportPath=target/dependency-check-report.xml \
-                        -Ddependency-check.format=XML \
                         -Dsonar.exclusions=**/vendor/**,**/node_modules/**,**/*.spec.ts \
                         -Dsonar.test.inclusions=**/*Test.java,**/*Tests.java,**/*IT.java \
                         -Dsonar.qualitygate.wait=false  # poner en true cuando se corrija el codigo

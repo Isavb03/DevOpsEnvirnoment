@@ -105,18 +105,20 @@
                 <version>4.0.0.4121</version>
             </plugin>
 
-            <!-- OWASP Dependency Check -->
             <plugin>
-                <groupId>org.owasp</groupId>
-                <artifactId>dependency-check-maven</artifactId>
-                <version>8.4.3</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
+            <groupId>org.owasp</groupId>
+            <artifactId>dependency-check-maven</artifactId>
+            <version>9.0.10</version>
+            <configuration>
+                <formats>XML</formats>
+            </configuration>
+            <executions>
+                <execution>
+                <goals>
+                    <goal>check</goal>
+                </goals>
+                </execution>
+            </executions>
             </plugin>
 
             <!-- JaCoCo for code coverage -->
