@@ -46,6 +46,9 @@ pipeline {
             steps {
                 withSonarQubeEnv('SonarQube') {
                     sh '''
+                        echo "NVD key length = ${#NVD_API_KEY}"
+                        # optionally mask the middle if you really need to see part of it
+                        echo "NVD key prefix = ${NVD_API_KEY:0:4}****"
                         mvn clean verify sonar:sonar \
                         -Dsonar.projectName='university-result-system' \
                         -Dsonar.host.url=http://sonarqube:9000 \
