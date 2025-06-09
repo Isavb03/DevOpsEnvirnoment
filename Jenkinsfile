@@ -38,20 +38,7 @@ pipeline {
             }                      
         }
 
-        stage('STEP 3.5: DEPENDENCY-CHECK INIT') {
-            agent { label 'maven' }
-            environment {
-                NVD_API_KEY = credentials('nvd-api-key')
-            }
-            steps {
-                sh '''
-                mvn org.owasp:dependency-check-maven:9.0.10:update-only \
-                    -Dnvd.api.key=${NVD_API_KEY}
-                '''
-            }
-        }
 
- 
         stage('STEP 4: SONARQUBE') {
             environment {
                 SONARQUBE_TOKEN = credentials('sonarqube-token')

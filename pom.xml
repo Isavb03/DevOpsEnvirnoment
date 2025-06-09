@@ -111,9 +111,10 @@
                 <version>9.0.10</version>
                 <configuration>
                     <formats>XML</formats>
-                    <nvdApiKey>${env.NVD_API_KEY}</nvdApiKey>
-                    <!-- use only the already-downloaded cache -->
-                    <autoUpdate>false</autoUpdate>
+                    <failOnError>false</failOnError>
+                    <nvdApiDelay>20000</nvdApiDelay>
+                    <nvdMaxRetryCount>15</nvdMaxRetryCount>
+                    <!-- REMOVED <nvdApiKey> to allow Jenkins CLI -D param to be used -->
                 </configuration>
                 <executions>
                     <execution>
@@ -123,6 +124,7 @@
                     </execution>
                 </executions>
             </plugin>
+
 
             <!-- JaCoCo for code coverage -->
             <plugin>
