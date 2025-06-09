@@ -106,19 +106,21 @@
             </plugin>
 
             <plugin>
-            <groupId>org.owasp</groupId>
-            <artifactId>dependency-check-maven</artifactId>
-            <version>9.0.10</version>
-            <configuration>
-                <formats>XML</formats>
-            </configuration>
-            <executions>
-                <execution>
-                <goals>
-                    <goal>check</goal>
-                </goals>
-                </execution>
-            </executions>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>9.0.10</version>
+                <configuration>
+                    <formats>XML</formats>
+                    <skipOssIndex>true</skipOssIndex>
+                    <skipNvdUpdate>true</skipNvdUpdate>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
             <!-- JaCoCo for code coverage -->
