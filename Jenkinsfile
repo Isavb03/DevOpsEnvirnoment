@@ -41,6 +41,7 @@ pipeline {
         stage('STEP 4: SONARQUBE') {
             environment {
                 SONARQUBE_TOKEN = credentials('sonarqube-token')
+                NVD_API_KEY = credentials('nvd-api-key')
             }
             steps {
                 withSonarQubeEnv('SonarQube') {
@@ -58,7 +59,8 @@ pipeline {
                         -Dsonar.dependencyCheck.reportPath=target/dependency-check-report.xml \
                         -Dsonar.exclusions=**/vendor/**,**/node_modules/**,**/*.spec.ts \
                         -Dsonar.test.inclusions=**/*Test.java,**/*Tests.java,**/*IT.java \
-                        -Dsonar.qualitygate.wait=false  # poner en true cuando se corrija el codigo
+                        -Dsonar.qualitygate.wait=false \
+                        -Dnvd.api.key=${NVD_API_KEY}
                     '''
                 }
             }
