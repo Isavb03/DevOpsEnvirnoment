@@ -1,8 +1,6 @@
 package project;
 
 import java.sql.*;
-// import com.zaxxer.hikari.HikariConfig;
-// import com.zaxxer.hikari.HikariDataSource;
 
 public class DatabaseConfig {
     // Method called in JSP files
