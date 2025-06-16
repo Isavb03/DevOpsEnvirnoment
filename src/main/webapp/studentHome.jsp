@@ -5,7 +5,7 @@
       try{
     	  
     	  String rollNo=request.getParameter("rollNo");
-    	  Connection con=DatabaseConfig.getCon();
+    	  Connection con=ConnectionProvider.getCon();
     		Statement st=con.createStatement();
     		ResultSet rs=st.executeQuery("select * from student inner join result where student.reg_number=result.reg_number and student.reg_number='"+rollNo+"'");
     		if (rs.next()){
