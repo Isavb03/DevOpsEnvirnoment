@@ -7,7 +7,7 @@
     	  String rollNo=request.getParameter("rollNo");
     	  Connection con=ConnectionProvider.getCon();
     		Statement st=con.createStatement();
-    		ResultSet rs=st.executeQuery("select * from student inner join result where student.reg_number=result.reg_number and student.reg_number='"+rollNo+"'");
+    		ResultSet rs=st.executeQuery("select * from student inner join result where student.RegNo=result.IndexNo and student.RegNo='"+rollNo+"'");
     		if (rs.next()){
     			
     			
